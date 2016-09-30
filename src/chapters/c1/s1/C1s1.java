@@ -1,5 +1,9 @@
 package chapters.c1.s1;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 /**
  * Created by royxia01 on 9/29/2016.
  */
@@ -271,31 +275,63 @@ public class C1s1 {
      * 1.1.14 Write a static method lg() that takes an int value N as argument and returns
      * the largest int not larger than the base-2 logarithm of N. Do not use Math.
      */
-    public static void lg() {
-
+    public static int lg(int N) {
+        if (N == 0)
+            return -1;
+        if (N == 1)
+            return 0;
+        if (N == 2)
+            return 1;
+        int difference = N - 2;
+        int track = 2;
+        int counter = 1;
+        for (int i = 0; i < N; i++) {
+            track *= 2;
+            if ((N - track) < difference)
+                difference = N - track;
+            if (track > N)
+                return counter;
+            counter++;
+        }
+        return 0;
     }
 
 
     /**
-     1.1.15 Write a static method histogram() that takes an array a[] of int values and
-     an integer M as arguments and returns an array of length M whose ith entry is the number
-     of times the integer i appeared in the argument array. If the values in a[] are all
-     between 0 and M–1, the sum of the values in the returned array should be equal to
-     a.length.
+     * 1.1.15
+     * Write a static method histogram() that takes an array a[] of int values and
+     * an integer M as arguments and returns an array of length M whose ith entry is the number
+     * of times the integer i appeared in the argument array. If the values in a[] are all
+     * between 0 and M–1, the sum of the values in the returned array should be equal to
+     * a.length.
      */
+    public static int histogram(int[] a, int M) {
+        int[] rArray = new int[M];
+        for (int i : rArray)
+            i = 0;
+        for (int i = 0; i < a.length; i++)
+            rArray[a[i]]++;
 
-    public static void histogram() {
-
+        int sum = 0;
+        for (int i : rArray)
+            sum += i;
+        System.out.println(sum);
+        return 0;
     }
+
     /**
-     1.1.16 Give the value of exR1(6):
-     public static String exR1(int n)
-     {
-     if (n <= 0) return "";
-     return exR1(n-3) + n + exR1(n-2) + n;
-     }
-     EXERCISES (continued)
-     56 CHAPTER 1 ■ Fundamentals
+     * 1.1.16
+     * Give the value of exR1(6):
+     * public static String exR1(int n)
+     * {
+     * if (n <= 0) return "";
+     * return exR1(n-3) + n + exR1(n-2) + n;
+     * }
+     */
+    /**
+     * Answer: 311361142246
+     */
+    /**
      1.1.17 Criticize the following recursive function:
      public static String exR2(int n)
      {
@@ -305,66 +341,122 @@ public class C1s1 {
      }
      Answer : The base case will never be reached. A call to exR2(3) will result in calls to
      exR2(0), exR2(-3), exR3(-6), and so forth until a StackOverflowError occurs.
-     1.1.18 Consider the following recursive function:
-     public static int mystery(int a, int b)
-     {
-     if (b == 0) return 0;
-     if (b % 2 == 0) return mystery(a+a, b/2);
-     return mystery(a+a, b/2) + a;
-     }
-     What are the values of mystery(2, 25) and mystery(3, 11)? Given positive integers
-     a and b, describe what value mystery(a, b) computes. Answer the same question, but
-     replace + with * and replace return 0 with return 1.
-     1.1.19 Run the following program on your computer:
-     public class Fibonacci
-     {
-     public static long F(int N)
-     {
-     if (N == 0) return 0;
-     if (N == 1) return 1;
-     return F(N-1) + F(N-2);
-     }
-     public static void main(String[] args)
-     {
-     for (int N = 0; N < 100; N++)
-     StdOut.println(N + " " + F(N));
-     }
-     }
-     1.1 ■ Basic Programming Model 57
-     What is the largest value of N for which this program takes less 1 hour to compute the
-     value of F(N)? Develop a better implementation of F(N) that saves computed values in
-     an array.
-     1.1.20 Write a recursive static method that computes the value of ln (N !)
-     1.1.21 Write a program that reads in lines from standard input with each line containing
-     a name and two integers and then uses printf() to print a table with a column of
-     the names, the integers, and the result of dividing the first by the second, accurate to
-     three decimal places. You could use a program like this to tabulate batting averages for
-     baseball players or grades for students.
-     1.1.22 Write a version of BinarySearch that uses the recursive rank() given on page
+     */
+
+    /**
+     * 1.1.18 Consider the following recursive function:
+     * public static int mystery(int a, int b)
+     * {
+     * if (b == 0) return 0;
+     * if (b % 2 == 0) return mystery(a+a, b/2);
+     * return mystery(a+a, b/2) + a;
+     * }
+     * What are the values of mystery(2, 25) and mystery(3, 11)? Given positive integers
+     * a and b, describe what value mystery(a, b) computes. Answer the same question, but
+     * replace + with * and replace return 0 with return 1.
+     */
+    /**
+     * Answer:  Fuck, this is too many layers of recurse
+     */
+
+    /**
+     * 1.1.19 Run the following program on your computer:
+     * public class Fibonacci
+     * {
+     * public static long F(int N)
+     * {
+     * if (N == 0) return 0;
+     * if (N == 1) return 1;
+     * return F(N-1) + F(N-2);
+     * }
+     * public static void main(String[] args)
+     * {
+     * for (int N = 0; N < 100; N++)
+     * StdOut.println(N + " " + F(N));
+     * }
+     * }
+     * What is the largest value of N for which this program takes less 1 hour to compute the
+     * value of F(N)? Develop a better implementation of F(N) that saves computed values in
+     * an array.
+     */
+    /**
+     * Please refer to Fibonacci.class
+     */
+
+
+    /**
+     * 1.1.20 Write a recursive static method that computes the value of ln (N !)
+     */
+    public static int computeLnN(int n) {
+        return 1;
+    }
+
+    /**
+     * 1.1.21
+     * Write a program that reads in lines from standard input with each line containing
+     * a name and two integers and then uses printf() to print a table with a column of
+     * the names, the integers, and the result of dividing the first by the second, accurate to
+     * three decimal places. You could use a program like this to tabulate batting averages for
+     * baseball players or grades for students.
+     */
+    public static void printScore() {
+        Scanner s = new Scanner(System.in);
+        String line;
+        Map<String, String> map = new HashMap<>();
+        while (s.hasNextLine() && !(line = s.nextLine()).equals("")) {
+            String[] tokens = line.split(" ");
+            int score = Integer.valueOf(tokens[1]) / Integer.valueOf(tokens[2]);
+            map.put(tokens[0], String.valueOf(score));
+        }
+        System.out.println("Name\tScore");
+        for (Map.Entry<String, String> entry : map.entrySet())
+            System.out.println(entry.getKey() + "\t" + entry.getValue());
+    }
+    /**
+     1.1.22
+     Write a version of BinarySearch that uses the recursive rank() given on page
      25 and traces the method calls. Each time the recursive method is called, print the argument
      values lo and hi, indented by the depth of the recursion. Hint: Add an argument
      to the recursive method that keeps track of the depth.
-     1.1.23 Add to the BinarySearch test client the ability to respond to a second argument:
+     */
+
+
+    /**
+     1.1.23
+     Add to the BinarySearch test client the ability to respond to a second argument:
      + to print numbers from standard input that are not in the whitelist, - to print
      numbers that are in the whitelist.
-     1.1.24 Give the sequence of values of p and q that are computed when Euclid’s algorithm
+     */
+
+    /**
+     1.1.24
+     Give the sequence of values of p and q that are computed when Euclid’s algorithm
      is used to compute the greatest common divisor of 105 and 24. Extend the code
      given on page 4 to develop a program Euclid that takes two integers from the command
      line and computes their greatest common divisor, printing out the two arguments for
      each call on the recursive method. Use your program to compute the greatest common
      divisor or 1111111 and 1234567.
+     */
+
+    /**
      1.1.25 Use mathematical induction to prove that Euclid’s algorithm computes the
      greatest common divisor of any pair of nonnegative integers p and q.
-     EXERCISES (continued)
-     58 CHAPTER 1 ■ Fundamentals
      CREATIVE PROBLEMS
-     1.1.26 Sorting three numbers. Suppose that the variables a, b, c, and t are all of the
+     */
+
+    /**
+     1.1.26
+     Sorting three numbers. Suppose that the variables a, b, c, and t are all of the
      same numeric primitive type. Show that the following code puts a, b, and c in ascending
      order:
      if (a > b) { t = a; a = b; b = t; }
      if (a > c) { t = a; a = c; c = t; }
      if (b > c) { t = b; b = c; c = t; }
-     1.1.27 Binomial distribution. Estimate the number of recursive calls that would be
+     */
+
+    /**
+     1.1.27
+     Binomial distribution. Estimate the number of recursive calls that would be
      used by the code
      public static double binomial(int N, int k, double p)
      {
@@ -373,28 +465,52 @@ public class C1s1 {
      }
      to compute binomial(100, 50). Develop a better implementation that is based on
      saving computed values in an array.
-     1.1.28 Remove duplicates. Modify the test client in BinarySearch to remove any duplicate
+     */
+
+
+    /**
+     1.1.28
+     Remove duplicates. Modify the test client in BinarySearch to remove any duplicate
      keys in the whitelist after the sort.
+     */
+
+    /**
      1.1.29 Equal keys. Add to BinarySearch a static method rank() that takes a key and
      a sorted array of int values (some of which may be equal) as arguments and returns the
      number of elements that are smaller than the key and a similar method count() that
      returns the number of elements equal to the key. Note : If i and j are the values returned
      by rank(key, a) and count(key, a) respectively, then a[i..i+j-1] are the values in
      the array that are equal to key.
-     1.1.30 Array exercise. Write a code fragment that creates an N-by-N boolean array
+     */
+
+    /**
+     1.1.30
+     Array exercise. Write a code fragment that creates an N-by-N boolean array
      a[][] such that a[i][j] is true if i and j are relatively prime (have no common factors),
      and false otherwise.
-     1.1.31 Random connections. Write a program that takes as command-line arguments
+     */
+
+    /**
+     1.1.31
+     Random connections. Write a program that takes as command-line arguments
      an integer N and a double value p (between 0 and 1), plots N equally spaced dots of size
      .05 on the circumference of a circle, and then, with probability p for each pair of points,
      draws a gray line connecting them.
-     1.1 ■ Basic Programming Model 59
-     1.1.32 Histogram. Suppose that the standard input stream is a sequence of double
+     */
+
+
+    /**
+     1.1.32
+     Histogram. Suppose that the standard input stream is a sequence of double
      values. Write a program that takes an integer N and two double values l and r from the
      command line and uses StdDraw to plot a histogram of the count of the numbers in the
      standard input stream that fall in each of the N intervals defined by dividing (l , r) into
      N equal-sized intervals.
-     1.1.33 Matrix library. Write a library Matrix that implements the following API:
+     */
+
+    /**
+     1.1.33
+     Matrix library. Write a library Matrix that implements the following API:
      public class Matrix
      static double dot(double[] x, double[] y) vector dot product
      static double[][] mult(double[][] a, double[][] b) matrix-matrix product
@@ -402,7 +518,11 @@ public class C1s1 {
      static double[] mult(double[][] a, double[] x) matrix-vector product
      static double[] mult(double[] y, double[][] a) vector-matrix product
      Develop a test client that reads values from standard input and tests all the methods.
-     1.1.34 Filtering. Which of the following require saving all the values from standard
+     */
+
+    /**
+     1.1.34
+     Filtering. Which of the following require saving all the values from standard
      input (in an array, say), and which could be implemented as a filter using only a fixed
      number of variables and arrays of fixed size (not dependent on N)? For each, the input
      comes from standard input and consists of N real numbers between 0 and 1.
@@ -414,10 +534,12 @@ public class C1s1 {
      ■ Print the percentage of numbers greater than the average.
      ■ Print the N numbers in increasing order.
      ■ Print the N numbers in random order.
-     CREATIVE PROBLEMS (continued)
-     60 CHAPTER 1 ■ Fundamentals
+     */
+
+    /**
      EXPERIMENTS
-     1.1.35 Dice simulation. The following code computes the exact probability distribution
+     1.1.35
+     Dice simulation. The following code computes the exact probability distribution
      for the sum of two dice:
      int SIDES = 6;
      double[] dist = new double[2*SIDES+1];
@@ -431,20 +553,34 @@ public class C1s1 {
      of each value when you compute the sum of two random integers between 1
      and 6. How large does N have to be before your empirical results match the exact results
      to three decimal places?
-     1.1.36 Empirical shuffle check. Run computational experiments to check that our
+     */
+
+    /**
+     1.1.36
+     Empirical shuffle check. Run computational experiments to check that our
      shuffling code on page 32 works as advertised. Write a program ShuffleTest that takes
      command-line arguments M and N, does N shuffles of an array of size M that is initialized
      with a[i] = i before each shuffle, and prints an M-by-M table such that row i
      gives the number of times i wound up in position j for all j. All entries in the array
      should be close to N/M.
-     1.1.37 Bad shuffling. Suppose that you choose a random integer between 0 and N-1
+     */
+
+    /**
+     1.1.37
+     Bad shuffling. Suppose that you choose a random integer between 0 and N-1
      in our shuffling code instead of one between i and N-1. Show that the resulting order is
      not equally likely to be one of the N! possibilities. Run the test of the previous exercise
      for this version.
-     1.1.38 Binary search versus brute-force search. Write a program BruteForceSearch
+     */
+
+    /**
+     1.1.38
+     Binary search versus brute-force search. Write a program BruteForceSearch
      that uses the brute-force search method given on page 48 and compare its running time
      on your computer with that of BinarySearch for largeW.txt and largeT.txt.
-     1.1 ■ Basic Programming Model 61
+     */
+
+    /**
      1.1.39 Random matches. Write a BinarySearch client that takes an int value T as
      command-line argument and runs T trials of the following experiment for N = 103, 104,
      105, and 106: generate two arrays of N randomly generated positive six-digit int values,
